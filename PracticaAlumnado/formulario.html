@@ -1,4 +1,36 @@
-<html>  
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Estudiantes</title>
+</head>
+<body>
+  <h2>Registro de Estudiantes</h2>
+  <form action="php/procesar_registro.php" method="POST">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required><br><br>
 
+    <label for="apellidos">Apellidos:</label><br>
+    <input type="text" id="apellidos" name="apellidos" required><br><br>
 
+    <label for="fecha_nacimiento">Fecha de nacimiento:</label><br>
+    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br><br>
+
+    <label for="curso">Curso:</label><br>
+    <select id="curso" name="curso" required>
+      <option value="1º ESO">1º ESO</option>
+      <option value="2º ESO">2º ESO</option>
+      <option value="3º ESO">3º ESO</option>
+      <option value="4º ESO">4º ESO</option>
+    </select><br><br>
+
+    <label for="email">Email de Educamos:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="password">Contraseña de Educamos:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <button type="submit">Registrar</button>
+  </form>
+</body>
 </html>
