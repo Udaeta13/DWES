@@ -1,7 +1,3 @@
-<?php
-include("php/conexion.php");
-?>
-
 <!DOCTYPE html>
 <html lang="es">
   
@@ -13,7 +9,7 @@ include("php/conexion.php");
 <body>
   <h2>Registro de Estudiantes</h2>
 
-  <form action="procesar_registro.php" method="POST">
+  <form action="php/procesar_registro.php" method="POST">
     <label>Nombre:</label><br>
     <input type="text" name="nombre" required><br><br>
 
@@ -53,7 +49,10 @@ include("php/conexion.php");
       <th>Email</th>
     </tr>
     <?php
-    $result = $conexion->query("SELECT nombre, apellidos, fecha_nacimiento, curso, email FROM alumno");
+
+    include("php/conexion.php");
+
+    $result = $conexion->query("SELECT nombre, apellidos, fecha_nacimiento, curso, email FROM alumno ORDER BY curso, apellidos");
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
