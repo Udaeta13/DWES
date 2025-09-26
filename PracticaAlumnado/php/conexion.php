@@ -1,6 +1,6 @@
 <?php
 
 // Crear conexión
-$conn = new mysqli("localhost", "root", "", database: "colegio");
+$conexion = new mysqli("localhost", "root", "", database: "colegio");
 
 ?>
