@@ -1,16 +1,21 @@
 <?php
 class F2 extends Monoplaza {
-    private $tieneSuperlicencia;
+    private $superlicencia;
 
-    public function __construct($nombrePiloto, $nacionalidad, $numero, $escuderia, $puntos, $tieneSuperlicencia) {
+    public function __construct($nombrePiloto, $nacionalidad, $numero, $escuderia, $superlicencia, $puntos = 0) {
         parent::__construct($nombrePiloto, $nacionalidad, $numero, $escuderia, $puntos);
-        $this->tieneSuperlicencia = $tieneSuperlicencia;
+        $this->superlicencia = $superlicencia;
     }
 
-    public function mostrarInformacion() {
-        parent::mostrarInformacion();
-        $estado = $this->tieneSuperlicencia ? "Sí" : "No";
-        echo "¿Tiene superlicencia?: {$estado}<br><br>";
+    public function otorgarPuntos($posicion, $vueltaRapida) {
+        $tabla = [1=>10, 2=>8, 3=>7, 4=>6, 5=>5, 6=>4, 7=>3, 8=>2, 9=>1];
+        $puntosGanados = $tabla[$posicion] ?? 0;
+
+        if ($vueltaRapida && $posicion <= 9) {
+            $puntosGanados += 1;
+        }
+
+        $this->puntos += $puntosGanados;
     }
 }
 ?>

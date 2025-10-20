@@ -1,11 +1,11 @@
 <?php
 class Monoplaza {
     //Atributos
-    private $nombrePiloto;
-    private $nacionalidad;
-    private $numero;
-    private $escuderia;
-    private $puntos;
+    protected $nombrePiloto;
+    protected $nacionalidad;
+    protected $numero;
+    protected $escuderia;
+    protected $puntos;
 
     //Constructor
     public function __construct($nombrePiloto, $nacionalidad, $numero, $escuderia, $puntos) {
@@ -57,12 +57,13 @@ class Monoplaza {
         $this->puntos = $puntos;
     }
 
-    public function mostrarInformacion() {
-        echo "<strong>Monoplaza #{$this->numero}</strong><br>";
-        echo "Piloto: {$this->nombrePiloto}<br>";
-        echo "Nacionalidad: {$this->nacionalidad}<br>";
-        echo "Escudería: {$this->escuderia}<br>";
-        echo "Puntos: {$this->puntos}<br>";
+    public function __toString() {
+        return "{$this->nombrePiloto} ({$this->escuderia}) - {$this->puntos} puntos";
     }
+
+    public function otorgarPuntos($posicion, $vueltaRapida) {
+        // Este método se redefine en las clases hijas
+    }
+
 }
 ?>
