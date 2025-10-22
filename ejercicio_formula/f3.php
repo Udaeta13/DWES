@@ -8,7 +8,7 @@ class F3 extends Monoplaza {
     }
 
     public function posicionValida($posicion) {
-        return $posicion >= 1 && $posicion <= 9;
+        return $posicion >= 1 && $posicion <= 30;
     }
 
     public function otorgarPuntos($posicion, $vueltaRapida) {
@@ -20,8 +20,25 @@ class F3 extends Monoplaza {
         $tabla = [1=>10, 2=>8, 3=>7, 4=>6, 5=>5, 6=>4, 7=>3, 8=>2, 9=>1];
         $puntosGanados = $tabla[$posicion] ?? 0;
 
-        // F3 no suma punto por vuelta rápida
         $this->puntos += $puntosGanados;
+    }
+
+    public function subirCategoria(bool $tieneSuperlicencia): Monoplaza {
+        if ($tieneSuperlicencia) {
+            echo "{$this->nombrePiloto} sube de F3 a F2.<br>";
+            return new F2(
+                $this->nombrePiloto,
+                $this->nacionalidad,
+                $this->numero,
+                $this->escuderia,
+                $tieneSuperlicencia,
+                $this->puntos
+            );
+        } else {
+            echo "{$this->nombrePiloto} no tiene los puntos suficientes de superlicencia para subir a F2.<br>";
+            return $this;
+        }
     }
 }
 ?>
+
