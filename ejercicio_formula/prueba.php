@@ -2,11 +2,22 @@
 
 $pilotos = [16,44];
 
-$numeros = implode("&", array_map(fn($n) => "driver_number=$n", $pilotos));
+// Construye la URL con los números de los pilotos
+$parametros = [];
+
+// Recorre los números de pilotos para crear los parámetros de la URL
+foreach ($pilotos as $n) {
+    $parametros[] = "driver_number=$n";
+}
+
+// Une los parámetros con '&'
+$numeros = implode("&", $parametros);
 $url = "https://api.openf1.org/v1/drivers?$numeros&session_key=9158";
 
+// Inicializa cURL
 $curl = curl_init();
 
+// Configura las opciones de cURL
 curl_setopt_array($curl, array(
     CURLOPT_URL => $url,
     CURLOPT_RETURNTRANSFER => true,
@@ -18,18 +29,24 @@ curl_setopt_array($curl, array(
     CURLOPT_CUSTOMREQUEST => "GET",
 ));
 
+// Ejecuta la solicitud cURL
 $response = curl_exec($curl);
 $err = curl_error($curl);
 
+
+// Cierra la sesión cURL
 curl_close($curl);
 
+// Maneja errores de cURL
 if ($err) {
     echo "cURL Error #:" . $err;
     exit;
 }
 
+// Decodifica la respuesta JSON
 $data = json_decode($response, true);
 
+// Muestra los datos en una tabla HTML
 echo "<h2>Datos de pilotos seleccionados</h2>";
 echo "<table border='1' cellpadding='6' cellspacing='0'>";
 echo "<tr>
@@ -38,7 +55,7 @@ echo "<tr>
         <th>Equipo</th>
         <th>Nacionalidad</th>
         <th>Abreviatura</th>
-      </tr>";
+    </tr>";
 
 foreach ($data as $driver) {
     echo "<tr>
@@ -47,7 +64,7 @@ foreach ($data as $driver) {
             <td>{$driver['team_name']}</td>
             <td>{$driver['country_code']}</td>
             <td>{$driver['name_acronym']}</td>
-          </tr>";
+        </tr>";
 }
 
 echo "</table>";
